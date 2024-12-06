@@ -80,5 +80,7 @@ luac.out
 .xmake/
 .cache/
 *build*/
+.emmyrc.json
+gen_cc.lua
 compile_commands.json
 

@@ -1,0 +1,6 @@
+[submodule "thirdparty/elasticlient"]
+	path = thirdparty/elasticlient
+	url = https://github.com/seznam/elasticlient.git
+[submodule "thirdparty/vcpkg"]
+	path = thirdparty/vcpkg
+	url = https://github.com/microsoft/vcpkg.git
