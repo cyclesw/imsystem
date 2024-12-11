@@ -45,7 +45,7 @@ namespace ns_log
         static std::shared_ptr<spdlog::logger> _logger;
         static std::unordered_map<std::string, spdlog::sink_ptr> _sinks;
     public:
-        static void InitLogger(bool mode, LogLevel level, const std::string& pattern = "", const std::string &file = "");
+        static void InitLogger(bool mode, LogLevel level, const std::string &file = "", const std::string& pattern = "%^[%c] [%l] [%s:%#]<%!>%$: %v");
 
         static void RegisterSink(const std::string& logger_name, const LogSetting &setting);
 

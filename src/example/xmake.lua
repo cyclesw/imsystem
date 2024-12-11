@@ -3,9 +3,10 @@
 --- DateTime: 2024/12/6 11:40
 ---
 
-add_rules("mode.debug", "mode.release")
+target ("passby")
+    add_files("passby.cc")
 
-option("enalbe_example")
-    set_default(true)
-    set_description("一些用法测试")
-    set_showmenu(true)
+target ("icsearchtest")
+    add_deps("until")
+    add_files("es/*.cc")
+    add_packages("elasticlient", "spdlog", "jsoncpp")

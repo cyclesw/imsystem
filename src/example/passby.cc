@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include <utility> // For std::move
+#include <string>
 
 class Demo {
 private:

@@ -5,14 +5,14 @@
 #ifndef ICSEARCH_H
 #define ICSEARCH_H
 
-#include <memory>
 #include <string>
-#include <utility>
+#include <json/json.h>
 
 namespace elasticlient
 {
     class Client;
 }
+
 
 namespace ns_im {
 
@@ -40,9 +40,9 @@ namespace ns_im {
     class ESInsert
     {
     public:
-        ESInsert(std::shared_ptr<elasticlient::Client> client,
-            const std::string& name,
-            const std::string& type = "_doc"
+        ESInsert(const std::shared_ptr<elasticlient::Client>& client,
+            std::string  name,
+            std::string  type = "_doc"
             );
 
         template <class T>
@@ -63,14 +63,11 @@ namespace ns_im {
 
     class ESRemove {
     public:
-        ESRemove(std::shared_ptr<elasticlient::Client> &client,
+        ESRemove(const std::shared_ptr<elasticlient::Client> &client,
             std::string name,
-            std::string type = "_doc")
-                :_name(std::move(name))
-                ,_type(std::move(type))
-                ,_client(client){}
+            std::string type = "_doc");
 
-        bool remove(const std::string &id);
+        bool Remove(const std::string &id);
 
     private:
         std::string _name;
@@ -82,8 +79,8 @@ namespace ns_im {
     {
     public:
         ESSearch(std::shared_ptr<elasticlient::Client> &client,
-            const std::string &name,
-            const std::string &type = "_doc");
+            std::string name,
+            std::string type = "");
 
         ESSearch& AppendMustNotTerms(const std::string &key, const std::vector<std::string> &vals);
 
@@ -93,7 +90,7 @@ namespace ns_im {
 
         ESSearch& AppendMustMatch(const std::string &key, const std::string &val);
 
-        Json::Value Search(const std::string &key, const std::vector<std::string> &vals);
+        Json::Value Search();
     private:
         std::string _name;
         std::string _type;

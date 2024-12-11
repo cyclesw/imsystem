@@ -9,30 +9,44 @@ if is_mode("debug") then
     set_symbols("debug")
     set_optimize("none")
 end
-
 -- TODO:
 -- 1. 从包管理器获取，不要让用户自己手动构建依赖。
 -- 2. 使用静态库
+-- 3. 运行 bootstrap-vcpkg.sh
 
 add_requires("spdlog")
 add_requires("jsoncpp")
 add_requires("cpr")
+add_requires("cpp-httplib")
 add_requires("brpc", {system = true})
 add_requires("protobuf", {system = true, alias = "protobuf-cpp"})
 add_requires("vcpkg::etcd-cpp-apiv3",{ alias = "etcd-app-api"} )
 
 includes("thirdparty")
 
+option("enalbe_example")
+    set_default(true)
+    set_description("一些用法测试")
+    set_showmenu(true)
+
+
+if is_config("enalbe_example", true) then
+    includes("src/example")
+end
+
+
 target("until")
     set_kind("static")
     add_files("src/common/*.cc")
     add_deps("elasticlient")
     add_packages("spdlog","protobuf-cpp", "brpc", "etcd-cpp-api", "jsoncpp", "cpr")
+    set_policy("build.merge_archive", true)
+
 
 
 target("ChatSystem")
     set_kind("binary")
-    add_files("src/*.cpp")
+    add_files("src/*.cc")
     add_deps("until")
     add_packages("spdlog")
 

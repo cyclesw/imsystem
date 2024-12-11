@@ -9,7 +9,7 @@
 std::shared_ptr<spdlog::logger> ns_log::Logger::_logger = nullptr;
 std::unordered_map<std::string, spdlog::sink_ptr> ns_log::Logger::_sinks;
 
-void ns_log::Logger::InitLogger(bool mode, LogLevel level, const std::string &pattern, const std::string &file)
+void ns_log::Logger::InitLogger(bool mode, LogLevel level, const std::string &file, const std::string &pattern)
 {
     if (!mode)
     {
